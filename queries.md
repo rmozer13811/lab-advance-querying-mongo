@@ -44,23 +44,32 @@ db.companies.find(
 
 ### 7. All the companies that have a null type of value on the `category_code` field.
 
-<!-- Your Code Goes Here -->
+{category_code:{ $type: 10 }}
 
 ### 8. All the companies that have at least 100 employees but less than 1000. Retrieve only the `name` and `number of employees` fields.
 
-<!-- Your Code Goes Here -->
+db.companies.find(
+{$and: [{ number_of_employees: { $gte: 100 }},{ number_of_employees: { $lte: 1000 }}]},
+{name: 1,number_of_employees: 1,\_id: 0}
+)
 
 ### 9. Order all the companies by their IPO price in a descending order.
 
-<!-- Your Code Goes Here -->
+sort: {"ipo.price": -1}
 
 ### 10. Retrieve the 10 companies with most employees, order by the `number of employees`
 
-<!-- Your Code Goes Here -->
+db.companies.find(
+undefined
+).limit(10)
 
 ### 11. All the companies founded on the second semester of the year. Limit your search to 1000 companies.
 
-<!-- Your Code Goes Here -->
+query:{founded_month:{$gt:6}}
+projection:
+sort:
+skip:
+limit:1000
 
 ### 12. All the companies founded before 2000 that have an acquisition amount of more than 10.000.000
 
